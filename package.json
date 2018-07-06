@@ -8,7 +8,9 @@
   },
   "author": "Kate",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-gh-pages": "^0.5.4"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
