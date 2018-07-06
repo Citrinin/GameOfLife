@@ -30,7 +30,13 @@ i{
     font-size: 34px;
 }
 
-
+.text-content{
+    font-family: "Consolas", sans-serif;
+    font-size:40px;
+    line-height: 0.6em;
+    color: antiquewhite;
+    overflow: unset;
+}
 
 #content{
     position: absolute;
@@ -48,10 +54,10 @@ i{
 .navbar{
     background-color:  rgb(20, 20, 20);
 }
-
+/* 
 .nav-item{
     font-size: 20px;
-}
+} */
 
 input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
