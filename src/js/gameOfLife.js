@@ -1,18 +1,18 @@
 export default class GameOfLife {
-    constructor(height, width, speed, drawCallback) {
+    constructor(height, width, speed, drawer) {
         this.HEIGHT = height;
         this.WIDTH = width;
         this.speed = speed;
         this.state = this.getEmpty2DArray(this.HEIGHT, this.WIDTH);
+        this.drawer = drawer;
 
         this.addGalaxy();
-
-        this.drawCallback = drawCallback;
         this.play = false;
+        this.toggleCell();
     }
 
     prepareGame() {
-        this.drawCallback(this.state);
+        this.drawer.draw(this.state);
     }
 
     toggleGame() {
@@ -25,7 +25,17 @@ export default class GameOfLife {
             clearInterval(this.timer);
         }
     }
-
+    changeSpeed(newValue) {
+        this.speed = newValue;
+        clearInterval(this.timer);
+        this.timer = setInterval(() => {
+            this.step();
+        }, this.speed);
+    }
+    stopGame() {
+        this.play = false;
+        clearInterval(this.timer);
+    }
     step() {
         var newArray = this.getEmpty2DArray(this.HEIGHT, this.WIDTH);
 
@@ -44,7 +54,7 @@ export default class GameOfLife {
             }
         }
         this.state = newArray;
-        this.drawCallback(this.state);
+        this.drawer.draw(this.state);
     }
 
     countAliveCells(array, x, y) {
@@ -65,7 +75,21 @@ export default class GameOfLife {
     getEmpty2DArray(height, width) {
         return new Array(height).fill(0).map(() => new Array(width).fill(0));
     }
-
+    toggleCell() {
+        this.drawer.board.addEventListener('click', event => {
+            console.log('pik');
+            var height = this.drawer.board.clientHeight;
+            var width = this.drawer.board.clientWidth;
+            var x = event.offsetX;
+            var y = event.offsetY;
+            var rowHeight = height / this.HEIGHT;
+            var cellWidth = width / this.WIDTH;
+            var offsetX = Math.floor(x / cellWidth);
+            var offsetY = Math.floor(y / rowHeight);
+            this.state[offsetY][offsetX] = this.state[offsetY][offsetX] ? 0 : 1;
+            this.drawer.draw(this.state);
+        });
+    }
     addGalaxy() {
         this.state[2][2] = 1;
         this.state[3][2] = 1;

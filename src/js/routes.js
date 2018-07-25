@@ -3,7 +3,7 @@ import Drawer from './utils/drawer';
 import { start } from 'repl';
 
 let drawer = new Drawer(document.querySelector('#content'));
-let game = new GameOfLife(13, 13, 100, drawer.drawText);
+let game = new GameOfLife(13, 13, 250, drawer);
 game.showControls();
 let startButton = document.querySelector('.play-button');
 startButton.addEventListener('click', () => {
@@ -13,6 +13,11 @@ startButton.addEventListener('click', () => {
     } else {
         startButton.innerHTML = '<i class="fas fa-play"></i>';
     }
+});
+
+let speedRange = document.querySelector('input[type=range]');
+speedRange.addEventListener('change', ev => {
+    game.changeSpeed(ev.target.value);
 });
 
 let routes = [
@@ -50,6 +55,9 @@ let routes = [
             changeActivePage('text');
             content.innerHTML = 'Text';
             game.prepareGame();
+        },
+        onLeave: () => {
+            game.stopGame();
         }
     },
     {

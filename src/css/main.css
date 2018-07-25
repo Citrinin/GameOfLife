@@ -16,6 +16,8 @@ h1 {
     border-style: solid;
     border-radius: 20px;
     margin: 20px;
+    user-select: none;
+    -moz-user-select: none;
 }
 
 .round-button {
@@ -62,6 +64,7 @@ h2 {
     line-height: 0.6em;
     color: antiquewhite;
     overflow: unset;
+    margin: 0;
 }
 
 #content {
@@ -70,6 +73,7 @@ h2 {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    border: solid rgba(128, 128, 128, 0.425) 1px;
 }
 
 .label {
@@ -83,16 +87,29 @@ h2 {
 
 .controls {
     display: none;
+    position: relative;
 }
-/* 
-.nav-item{
+
+.size-control {
+    position: absolute;
+    top: 20%;
+    right: 0;
+}
+.size-control label {
     font-size: 20px;
-} */
+}
+
+.size-control .size-input {
+    width: 100px;
+    font-weight: 600;
+    border-radius: 3px;
+}
 
 input[type='range'] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
     width: 100%; /* Specific width is required for Firefox. */
     background: transparent; /* Otherwise white in Chrome */
+    direction: rtl;
 }
 
 input[type='range']::-webkit-slider-thumb {

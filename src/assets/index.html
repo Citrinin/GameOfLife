@@ -49,19 +49,27 @@
         <div class="controls">
 
             <div class="row justify-content-md-center">
-                <button class="round-button">
-                    <i class="fas fa-backward"></i>
-                </button>
-                <button class="round-button play-button">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="round-button">
-                    <i class="fas fa-forward"></i>
-                </button>
+                <div>
+                    <button class="round-button">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button class="round-button play-button">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="round-button">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                </div>
+                <div class="size-control">
+                    <label for="x-size">x:</label>
+                    <input type="text" name="x-size" class="size-input">
+                    <label for="y-size">y:</label>
+                    <input type="text" name="y-size" class="size-input">
+                </div>
             </div>
             <div class="row justify-content-md-center">
                 <h5>Speed:</h5>
-                <input type="range">
+                <input type="range" min="10" max="500" value="250">
             </div>
         </div>
     </div>

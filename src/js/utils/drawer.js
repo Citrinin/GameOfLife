@@ -1,22 +1,50 @@
 export default class Drawer {
     constructor(boardElement) {
         this.elementForDrawing = boardElement;
-        this.drawText = (gameState) => {
 
-            this.elementForDrawing.innerHTML = '';
+        this.textBoard = document.createElement('pre');
+        this.textBoard.classList.add('text-content');
+        this.canvasBoard = document.createElement('canvas');
+        this.svgBoard = document.createElement('svg');
 
-            var pre = document.createElement('pre');
-            pre.classList.add('text-content');
+        this.draw = this.drawText;
+        this.board = this.textBoard;
+    }
 
-            var result = '';
-            gameState.forEach((item, i) => {
-                item.forEach((element, j) => {
-                    result += element ? 'x' : ' ';
-                });
-                result += '\n';
+    drawText(gameState) {
+        this.elementForDrawing.innerHTML = '';
+
+        var result = '';
+        gameState.forEach((item, i) => {
+            item.forEach((element, j) => {
+                result += element ? 'x' : ' ';
             });
-            pre.innerHTML = result;
-            this.elementForDrawing.appendChild(pre);
+            result += '\n';
+        });
+        this.board.innerHTML = result;
+        this.elementForDrawing.appendChild(this.board);
+    }
+
+    setDrawer(type) {
+        switch (type) {
+            case 'text': {
+                this.draw = this.drawText;
+                this.board = this.textBoard;
+                return;
+            }
+            case 'canvas': {
+                this.draw = this.drawCanvas;
+                this.board = this.canvasBoard;
+                return;
+            }
+            case 'svg': {
+                this.draw = this.drawSVG;
+                this.board = this.svgBoard;
+                return;
+            }
+            default: {
+                return;
+            }
         }
     }
 }
