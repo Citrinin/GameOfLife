@@ -9,6 +9,10 @@ h1 {
     font-size: 45px;
     font-weight: 100;
 }
+canvas,
+svg {
+    display: block;
+}
 .test {
     position: relative;
     height: 65vh;
@@ -64,10 +68,11 @@ h2 {
     font-family: 'Consolas', sans-serif;
     font-size: 45px;
     line-height: 0.34em;
-    letter-spacing: -10px;
+    letter-spacing: -9.7px;
     color: antiquewhite;
     overflow: unset;
     margin: 0;
+    transform: translate(-3%, -2%);
 }
 
 #content {

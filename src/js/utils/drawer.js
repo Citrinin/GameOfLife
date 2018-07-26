@@ -32,13 +32,21 @@ export default class Drawer {
 
     drawCanvas(gameState) {
         let context = this.board.getContext('2d');
+        var grd = context.createLinearGradient(
+            0,
+            0,
+            this.gameSize.width * this.pixelSize,
+            this.gameSize.height * this.pixelSize
+        );
+        grd.addColorStop(0, '#cc80ff');
+        grd.addColorStop(1, '#ffb366');
         context.clearRect(
             0,
             0,
             this.gameSize.width * this.pixelSize,
             this.gameSize.height * this.pixelSize
         );
-        context.fillStyle = 'antiquewhite';
+        context.fillStyle = grd;
         gameState.forEach((item, i) => {
             item.forEach((element, j) => {
                 element &&
@@ -53,7 +61,12 @@ export default class Drawer {
     }
 
     drawSVG(gameState) {
-        var result = '';
+        var result = `    <defs>
+        <linearGradient id="MyGradient" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%"  stop-color="#66e0ff"/>
+            <stop offset="100%" stop-color="#b366ff"/>
+        </linearGradient>
+    </defs>`;
         gameState.forEach((item, i) => {
             item.forEach((element, j) => {
                 result += element
@@ -62,7 +75,7 @@ export default class Drawer {
                     y="${i * this.pixelSize}" 
                     width="${this.pixelSize - 2}" 
                     height="${this.pixelSize - 2}"
-                    style="fill:antiquewhite;"></rect>`
+                    fill="url(#MyGradient)"></rect>`
                     : '';
             });
         });

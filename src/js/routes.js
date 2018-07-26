@@ -1,6 +1,5 @@
 import GameOfLife from './gameOfLife';
 import Drawer from './utils/drawer';
-import { start } from 'repl';
 
 let gameSize = {
     width: +document.querySelector('.size-input.x-input').value,
