@@ -2,8 +2,14 @@ import GameOfLife from './gameOfLife';
 import Drawer from './utils/drawer';
 import { start } from 'repl';
 
-let drawer = new Drawer(document.querySelector('#content'));
-let game = new GameOfLife(13, 13, 250, drawer);
+let gameSize = {
+    width: +document.querySelector('.size-input.x-input').value,
+    height: +document.querySelector('.size-input.y-input').value
+};
+
+let drawer = new Drawer(document.querySelector('#content'), gameSize);
+let game = new GameOfLife(gameSize, 250, drawer);
+
 game.showControls();
 let startButton = document.querySelector('.play-button');
 startButton.addEventListener('click', () => {
@@ -29,8 +35,12 @@ let routes = [
     },
     {
         match: 'about',
-        onEnter: () => {
+        onBeforeEnter: () => {
+            game.stopGame();
+            startButton.innerHTML = '<i class="fas fa-play"></i>';
             game.hideControls();
+        },
+        onEnter: () => {
             let content = document.querySelector('#content');
             changeActivePage('about');
             content.innerHTML = `
@@ -50,29 +60,13 @@ let routes = [
         }
     },
     {
-        match: 'text',
-        onEnter: () => {
-            changeActivePage('text');
-            content.innerHTML = 'Text';
+        match: /game-(.+)/,
+        onEnter: type => {
+            drawer.setDrawer(type[0]);
+            changeActivePage(type[0]);
             game.prepareGame();
         },
-        onLeave: () => {
-            game.stopGame();
-        }
-    },
-    {
-        match: 'canvas',
-        onEnter: () => {
-            changeActivePage('canvas');
-            content.innerHTML = 'Canvas';
-        }
-    },
-    {
-        match: 'svg',
-        onEnter: () => {
-            changeActivePage('svg');
-            content.innerHTML = 'SVG';
-        }
+        onLeave: () => {}
     }
 ];
 
@@ -80,6 +74,6 @@ export default routes;
 
 function changeActivePage(newPage) {
     document.querySelector('.active').className = '';
-    document.querySelector(`[href="#${newPage}"]`).parentElement.className =
+    document.querySelector(`[href*="${newPage}"]`).parentElement.className =
         'active';
 }

@@ -1,9 +1,11 @@
 export default class GameOfLife {
-    constructor(height, width, speed, drawer) {
-        this.HEIGHT = height;
-        this.WIDTH = width;
+    constructor(gameSize, speed, drawer) {
+        this.gameSize = gameSize;
         this.speed = speed;
-        this.state = this.getEmpty2DArray(this.HEIGHT, this.WIDTH);
+        this.state = this.getEmpty2DArray(
+            this.gameSize.height,
+            this.gameSize.width
+        );
         this.drawer = drawer;
 
         this.addGalaxy();
@@ -37,10 +39,13 @@ export default class GameOfLife {
         clearInterval(this.timer);
     }
     step() {
-        var newArray = this.getEmpty2DArray(this.HEIGHT, this.WIDTH);
+        var newArray = this.getEmpty2DArray(
+            this.gameSize.height,
+            this.gameSize.width
+        );
 
-        for (let i = 0; i < this.HEIGHT; i++) {
-            for (let j = 0; j < this.WIDTH; j++) {
+        for (let i = 0; i < this.gameSize.height; i++) {
+            for (let j = 0; j < this.gameSize.width; j++) {
                 var aliveCells = this.countAliveCells(this.state, i, j);
                 if (this.state[i][j]) {
                     if (aliveCells === 3 || aliveCells === 2) {
@@ -76,14 +81,17 @@ export default class GameOfLife {
         return new Array(height).fill(0).map(() => new Array(width).fill(0));
     }
     toggleCell() {
-        this.drawer.board.addEventListener('click', event => {
+        this.drawer.elementForDrawing.addEventListener('click', event => {
+            if (event.target !== this.drawer.board) {
+                return;
+            }
             console.log('pik');
             var height = this.drawer.board.clientHeight;
             var width = this.drawer.board.clientWidth;
             var x = event.offsetX;
             var y = event.offsetY;
-            var rowHeight = height / this.HEIGHT;
-            var cellWidth = width / this.WIDTH;
+            var rowHeight = height / this.gameSize.height;
+            var cellWidth = width / this.gameSize.width;
             var offsetX = Math.floor(x / cellWidth);
             var offsetY = Math.floor(y / rowHeight);
             this.state[offsetY][offsetX] = this.state[offsetY][offsetX] ? 0 : 1;

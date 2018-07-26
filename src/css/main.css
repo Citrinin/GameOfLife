@@ -10,6 +10,7 @@ h1 {
     font-weight: 100;
 }
 .test {
+    position: relative;
     height: 65vh;
     width: 100%;
     border-color: antiquewhite;
@@ -27,6 +28,7 @@ h1 {
     height: 50px;
     width: 50px;
     margin: 10px;
+    cursor: pointer;
 }
 .round-button:focus {
     outline: none;
@@ -60,8 +62,9 @@ h2 {
 
 .text-content {
     font-family: 'Consolas', sans-serif;
-    font-size: 40px;
-    line-height: 0.6em;
+    font-size: 45px;
+    line-height: 0.34em;
+    letter-spacing: -10px;
     color: antiquewhite;
     overflow: unset;
     margin: 0;
@@ -71,7 +74,6 @@ h2 {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-right: -50%;
     transform: translate(-50%, -50%);
     border: solid rgba(128, 128, 128, 0.425) 1px;
 }
