@@ -2,8 +2,8 @@ import GameOfLife from './gameOfLife';
 import Drawer from './utils/drawer';
 
 let gameSize = {
-    width: +document.querySelector('.size-input.x-input').value,
-    height: +document.querySelector('.size-input.y-input').value
+    width: +document.querySelector('.x-input').value,
+    height: +document.querySelector('.y-input').value
 };
 
 let drawer = new Drawer(document.querySelector('#content'), gameSize);
@@ -23,6 +23,28 @@ startButton.addEventListener('click', () => {
 let speedRange = document.querySelector('input[type=range]');
 speedRange.addEventListener('change', ev => {
     game.changeSpeed(ev.target.value);
+});
+
+let xSize = document.querySelector('.x-input');
+xSize.addEventListener('change', ev => {
+    if (ev.target.validity.valid) {
+        gameSize.width = +ev.target.value;
+        game.changeSize();
+        drawer.changeSize();
+    } else {
+        ev.target.value = gameSize.width;
+    }
+});
+
+let ySize = document.querySelector('.y-input');
+ySize.addEventListener('change', ev => {
+    if (ev.target.validity.valid) {
+        gameSize.height = +ev.target.value;
+        game.changeSize();
+        drawer.changeSize();
+    } else {
+        ev.target.value = gameSize.height;
+    }
 });
 
 let routes = [

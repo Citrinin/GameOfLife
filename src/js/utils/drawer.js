@@ -16,7 +16,7 @@ export default class Drawer {
 
         this.pixelSize = 15;
 
-        this.canvasImg = document.querySelector('.paw');
+        this.changeSize();
     }
 
     drawText(gameState) {
@@ -92,21 +92,11 @@ export default class Drawer {
             }
             case 'canvas': {
                 this.draw = this.drawCanvas;
-                this.canvasBoard.height = this.gameSize.height * this.pixelSize;
-                this.canvasBoard.width = this.gameSize.width * this.pixelSize;
                 this.board = this.canvasBoard;
                 break;
             }
             case 'svg': {
                 this.draw = this.drawSVG;
-                this.svgBoard.setAttribute(
-                    'height',
-                    this.gameSize.height * this.pixelSize
-                );
-                this.svgBoard.setAttribute(
-                    'width',
-                    this.gameSize.width * this.pixelSize
-                );
                 this.board = this.svgBoard;
                 break;
             }
@@ -117,5 +107,19 @@ export default class Drawer {
             }
         }
         this.elementForDrawing.appendChild(this.board);
+    }
+
+    changeSize() {
+        this.svgBoard.setAttribute(
+            'height',
+            this.gameSize.height * this.pixelSize
+        );
+        this.svgBoard.setAttribute(
+            'width',
+            this.gameSize.width * this.pixelSize
+        );
+
+        this.canvasBoard.height = this.gameSize.height * this.pixelSize;
+        this.canvasBoard.width = this.gameSize.width * this.pixelSize;
     }
 }

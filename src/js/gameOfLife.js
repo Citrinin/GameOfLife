@@ -165,4 +165,18 @@ export default class GameOfLife {
         var controlsDiv = document.querySelector('.controls');
         controlsDiv.style.display = 'none';
     }
+
+    changeSize() {
+        let newState = this.getEmpty2DArray(
+            this.gameSize.height,
+            this.gameSize.width
+        );
+
+        for (let i = 0; i < newState.length; i++) {
+            for (let j = 0; j < newState[i].length; j++) {
+                newState[i][j] = (this.state[i] || [])[j] || 0;
+            }
+        }
+        this.state = newState;
+    }
 }
