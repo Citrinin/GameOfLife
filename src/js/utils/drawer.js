@@ -23,7 +23,7 @@ export default class Drawer {
         var result = '';
         gameState.forEach((item, i) => {
             item.forEach((element, j) => {
-                result += element ? '&#9642;' : ' ';
+                result += element ? 'X' : ' ';
             });
             result += '\n';
         });

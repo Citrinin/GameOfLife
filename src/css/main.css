@@ -66,13 +66,12 @@ h2 {
 
 .text-content {
     font-family: 'Consolas', sans-serif;
-    font-size: 45px;
-    line-height: 0.34em;
-    letter-spacing: -9.7px;
+    letter-spacing: 3px;
+    font-size: 22px;
+    line-height: 0.71em;
     color: antiquewhite;
     overflow: unset;
     margin: 0;
-    transform: translate(-3%, -2%);
 }
 
 #content {

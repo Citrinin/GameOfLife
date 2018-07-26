@@ -85,7 +85,6 @@ export default class GameOfLife {
             if (event.target !== this.drawer.board) {
                 return;
             }
-            console.log('pik');
             var height = this.drawer.board.clientHeight;
             var width = this.drawer.board.clientWidth;
             var x = event.offsetX;
@@ -178,5 +177,6 @@ export default class GameOfLife {
             }
         }
         this.state = newState;
+        this.drawer.draw(this.state);
     }
 }
